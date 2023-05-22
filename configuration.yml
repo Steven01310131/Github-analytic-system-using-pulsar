@@ -23,7 +23,8 @@
      become: true
      git:
       repo: 'https://github.com/Steven01310131/Github-analytic-system-using-pulsar'
-      dest: /analytics_system 
+      dest: /repo
+      version: Max_ansible
       
   #  - name: Change ownership of a directory
   #    become: true
@@ -36,8 +37,8 @@
 
 # - hosts: prodserver
  
-  vars_files:
-   - setup_var.yml  
+  # vars_files:
+  #  - setup_var.yml  
   
   tasks:  
    - name: Extra packages
@@ -91,9 +92,9 @@
 
    - name: Running containers
      become: true
-     shell: docker compose up -d 
+     shell: docker build -t consumer
      args: 
-      chdir: /analytics_system/ci_cd/production_server 
+      chdir: /repo/consumer_test 
 
 # - hosts: devserver
   
