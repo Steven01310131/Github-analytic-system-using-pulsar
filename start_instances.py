@@ -58,9 +58,9 @@ else:
 secgroups = ['default']
 
 print ("Creating instances ... ")
-instance_consumer1 = nova.servers.create(name="consumer1_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
-instance_consumer2 = nova.servers.create(name="consumer2_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
-instance_consumer3 = nova.servers.create(name="consumer3_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
+instance_consumer1 = nova.servers.create(name="consumer1_group16", image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
+instance_consumer2 = nova.servers.create(name="consumer2_group16", image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
+instance_consumer3 = nova.servers.create(name="consumer3_group16", image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
 
 inst_status_consumer1 = instance_consumer1.status
 inst_status_consumer2 = instance_consumer2.status
