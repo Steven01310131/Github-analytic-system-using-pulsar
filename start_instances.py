@@ -58,38 +58,52 @@ else:
 secgroups = ['default']
 
 print ("Creating instances ... ")
-instance_consumer = nova.servers.create(name="consumer_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
-#instance_dev = nova.servers.create(name="dev_server_"+str(identifier), image=image, flavor=flavor, key_name='<KEY-NAME>',userdata=userdata_dev, nics=nics,security_groups=secgroups)
-inst_status_consumer = instance_consumer.status
-#inst_status_dev = instance_dev.status
+instance_consumer1 = nova.servers.create(name="consumer1_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
+instance_consumer2 = nova.servers.create(name="consumer2_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
+instance_consumer3 = nova.servers.create(name="consumer3_group16_"+str(identifier), image=image, flavor=flavor, key_name='DataEngi',userdata=userdata_consumer, nics=nics,security_groups=secgroups)
+
+inst_status_consumer1 = instance_consumer1.status
+inst_status_consumer2 = instance_consumer2.status
+inst_status_consumer3 = instance_consumer3.status
 
 print ("waiting for 10 seconds.. ")
 time.sleep(10)
 
-while inst_status_consumer == 'BUILD':
-    print ("Instance: "+instance_consumer.name+" is in "+inst_status_consumer+" state, sleeping for 5 seconds more...")
-    #print ("Instance: "+instance_dev.name+" is in "+inst_status_dev+" state, sleeping for 5 seconds more...")
+while inst_status_consumer1 == 'BUILD' or inst_status_consumer2 == 'BUILD' or inst_status_consumer3 == 'BUILD':
+    print ("Instance: "+instance_consumer1.name+" is in "+inst_status_consumer1+" state, sleeping for 5 seconds more...")
+    print ("Instance: "+instance_consumer2.name+" is in "+inst_status_consumer2+" state, sleeping for 5 seconds more...")
     time.sleep(5)
-    instance_consumer = nova.servers.get(instance_consumer.id)
-    inst_status_consumer = instance_consumer.status
-    #instance_dev = nova.servers.get(instance_dev.id)
-    #inst_status_dev = instance_dev.status
+    instance_consumer1 = nova.servers.get(instance_consumer1.id)
+    inst_status_consumer1 = instance_consumer1.status
+    instance_consumer2 = nova.servers.get(instance_consumer2.id)
+    inst_status_consumer2 = instance_consumer2.status
+    instance_consumer3 = nova.servers.get(instance_consumer3.id)
+    inst_status_consumer3 = instance_consumer3.status
 
-ip_address_consumer = None
-for network in instance_consumer.networks[private_net]:
+ip_address_consumer1 = None
+for network in instance_consumer1.networks[private_net]:
     if re.match('\d+\.\d+\.\d+\.\d+', network):
-        ip_address_consumer = network
+        ip_address_consumer1 = network
         break
-if ip_address_consumer is None:
+if ip_address_consumer1 is None:
     raise RuntimeError('No IP address assigned!')
 
-# ip_address_dev = None
-# for network in instance_dev.networks[private_net]:
-#     if re.match('\d+\.\d+\.\d+\.\d+', network):
-#         ip_address_dev = network
-#         break
-# if ip_address_dev is None:
-#     raise RuntimeError('No IP address assigned!')
+ip_address_consumer2 = None
+for network in instance_consumer2.networks[private_net]:
+    if re.match('\d+\.\d+\.\d+\.\d+', network):
+        ip_address_consumer2 = network
+        break
+if ip_address_consumer2 is None:
+    raise RuntimeError('No IP address assigned!')
 
-print ("Instance: "+ instance_consumer.name +" is in " + inst_status_consumer + " state" + " ip address: "+ ip_address_consumer)
-#print ("Instance: "+ instance_dev.name +" is in " + inst_status_dev + " state" + " ip address: "+ ip_address_dev)
+ip_address_consumer3 = None
+for network in instance_consumer3.networks[private_net]:
+    if re.match('\d+\.\d+\.\d+\.\d+', network):
+        ip_address_consumer3 = network
+        break
+if ip_address_consumer3 is None:
+    raise RuntimeError('No IP address assigned!')
+
+print ("Instance: "+ instance_consumer1.name +" is in " + inst_status_consumer1 + " state" + " ip address: "+ ip_address_consumer1)
+print ("Instance: "+ instance_consumer2.name +" is in " + inst_status_consumer2 + " state" + " ip address: "+ ip_address_consumer2)
+print ("Instance: "+ instance_consumer3.name +" is in " + inst_status_consumer3 + " state" + " ip address: "+ ip_address_consumer3)
