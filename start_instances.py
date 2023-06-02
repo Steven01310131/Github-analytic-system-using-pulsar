@@ -70,8 +70,9 @@ print ("waiting for 10 seconds.. ")
 time.sleep(10)
 
 while inst_status_consumer1 == 'BUILD' or inst_status_consumer2 == 'BUILD' or inst_status_consumer3 == 'BUILD':
-    #print ("Instance: "+instance_consumer1.name+" is in "+inst_status_consumer1+" state, sleeping for 5 seconds more...")
-    #print ("Instance: "+instance_consumer2.name+" is in "+inst_status_consumer2+" state, sleeping for 5 seconds more...")
+    print ("Instance: "+instance_consumer1.name+" is in "+inst_status_consumer1+" state, sleeping for 5 seconds more...")
+    print ("Instance: "+instance_consumer2.name+" is in "+inst_status_consumer2+" state, sleeping for 5 seconds more...")
+    print ("Instance: "+instance_consumer3.name+" is in "+inst_status_consumer3+" state, sleeping for 5 seconds more...")
     time.sleep(5)
     instance_consumer1 = nova.servers.get(instance_consumer1.id)
     inst_status_consumer1 = instance_consumer1.status
@@ -104,9 +105,9 @@ for network in instance_consumer3.networks[private_net]:
 if ip_address_consumer3 is None:
     raise RuntimeError('No IP address assigned!')
 
-# print ("Instance: "+ instance_consumer1.name +" is in " + inst_status_consumer1 + " state" + " ip address: "+ ip_address_consumer1)
-# print ("Instance: "+ instance_consumer2.name +" is in " + inst_status_consumer2 + " state" + " ip address: "+ ip_address_consumer2)
-# print ("Instance: "+ instance_consumer3.name +" is in " + inst_status_consumer3 + " state" + " ip address: "+ ip_address_consumer3)
+print ("Instance: "+ instance_consumer1.name +" is in " + inst_status_consumer1 + " state" + " ip address: "+ ip_address_consumer1)
+print ("Instance: "+ instance_consumer2.name +" is in " + inst_status_consumer2 + " state" + " ip address: "+ ip_address_consumer2)
+print ("Instance: "+ instance_consumer3.name +" is in " + inst_status_consumer3 + " state" + " ip address: "+ ip_address_consumer3)
 print(ip_address_consumer1)
 print(ip_address_consumer2)
 print(ip_address_consumer3)

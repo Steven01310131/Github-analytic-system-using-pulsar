@@ -14,10 +14,11 @@ docker run -d -it -p 6650:6650 -p 8080:8080 \
 apachepulsar/pulsar:2.7.0 bin/pulsar standalone
 
 git clone https://github.com/Steven01310131/Github-analytic-system-using-pulsar
+source /home/ubuntu/Github-analytic-system-using-pulsar/configur/UPPMAX_2023_1-1-openrc.sh
 /home/ubuntu/Github-analytic-system-using-pulsar/configur/nova.sh
 /home/ubuntu/Github-analytic-system-using-pulsar/configur/ansible.sh
 /home/ubuntu/Github-analytic-system-using-pulsar/configur/keygen.sh
-python3 /home/ubuntu/Github-analytic-system-using-pulsar/start_instances.py > ip_consumers.txt
+python3 /home/ubuntu/Github-analytic-system-using-pulsar/start_instances.py | grep "^192" > ip_consumers.txt
 /home/ubuntu/Github-analytic-system-using-pulsar/configur/cpyip.sh
 python3 /home/ubuntu/Github-analytic-system-using-pulsar/producer.py
 ansible-playbook /home/ubuntu/Github-analytic-system-using-pulsar/custom_ansible/consumers.yml
